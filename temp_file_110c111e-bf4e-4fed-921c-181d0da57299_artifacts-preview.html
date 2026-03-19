@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产业园调拨支持入库后检验需求 - 测试用例</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f6f9;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            background-color: #ecf0f1;
+            border-left: 6px solid #2980b9;
+            border-radius: 4px;
+            font-size: 18px;
+        }
+        .meta-info {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #dcdde1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .meta-info p {
+            margin: 0;
+            font-size: 14px;
+        }
+        .meta-info strong {
+            display: inline-block;
+            min-width: 100px;
+            color: #7f8c8d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e8f4fc;
+        }
+        .priority-high { color: #e74c3c; font-weight: bold; }
+        .priority-medium { color: #f39c12; font-weight: bold; }
+        .priority-low { color: #27ae60; font-weight: bold; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .tag-p0 { background-color: #fdeaea; color: #e74c3c; border: 1px solid #f5b7b1; }
+        .tag-p1 { background-color: #fef5e7; color: #f39c12; border: 1px solid #f9e79f; }
+        .tag-p2 { background-color: #e9f7ef; color: #27ae60; border: 1px solid #d5f4e6; }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 13px;
+            border-top: 1px solid #ecf0f1;
+        }
+        @media print {
+            body { background-color: #fff; }
+            table { page-break-inside: auto; }
+            tr    { page-break-inside: avoid; page-break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>产业园调拨支持入库后检验需求 - 测试用例</h1>
+
+    <div class="meta-info">
+        <p><strong>📄 需求文档版本：</strong>V1.0</p>
+        <p><strong>🎯 测试对象：</strong>产业园调拨入库后检验功能</p>
+        <p><strong>🏢 涉及业务主体：</strong>辰景、新全景、盛景</p>
+        <p><strong>📅 用例生成日期：</strong>2024-06-18</p>
+        <p><strong>👤 编写人：</strong>测试工程师</p>
+        <p><strong>🔢 用例总数：</strong>19</p>
+    </div>
+
+    <h2>一、 基础配置模块测试</h2>
+    <table>
+        <thead>
+            <tr>
+                <th width="5%">用例ID</th>
+                <th width="10%">模块</th>
+                <th width="20%">测试场景</th>
+                <th width="25%">测试步骤</th>
+                <th width="30%">预期结果</th>
+                <th width="10%">优先级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-BASE-001</td>
+                <td>基础配置</td>
+                <td>新增有效的仓间调拨触发检验配置</td>
+                <td>1. 进入【基础配置-仓间调拨触发检验配置】页面<br>2. 新增一条配置：调出仓=“宜宾坯布仓”，调入仓=“盛泽仓”<br>3. 保存配置</td>
+                <td>1. 配置保存成功，提示“保存成功”<br>2. 配置列表显示新添加的组合</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-BASE-002</td>
+                <td>基础配置</td>
+                <td>配置不匹配，调拨不触发检验</td>
+                <td>1. 已配置：A仓→B仓触发检验<br>2. 创建调拨单：调出仓=A仓，调入仓=C仓<br>3. 执行调拨入库审核</td>
+                <td>1. 审核通过<br>2. 未生成任何入库检验单<br>3. 对应入库单的质检状态不为“检验中”</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+            <tr>
+                <td>TC-BASE-003</td>
+                <td>基础配置</td>
+                <td>多主体（辰景、新全景、盛景）配置独立生效</td>
+                <td>1. 在辰景主体下配置：仓1→仓2<br>2. 在新全景主体下配置：仓3→仓4<br>3. 切换不同主体账号，分别执行对应配置的调拨入库</td>
+                <td>各主体仅对自身配置的仓库组合生效，主体间配置互不影响</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>二、 调拨入库与检验单生成模块测试</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>用例ID</th>
+                <th>模块</th>
+                <th>测试场景</th>
+                <th>测试步骤</th>
+                <th>预期结果</th>
+                <th>优先级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-IN-001</td>
+                <td>调拨入库审核</td>
+                <td>审核符合配置的调拨单，自动生成入库检验单</td>
+                <td>1. 创建一条调拨单，明细包含商品、货主、批号、批次、质量等级等信息<br>2. 确保调出仓、调入仓组合已在基础配置中<br>3. 执行调拨入库审核操作</td>
+                <td>1. 审核成功<br>2. 系统自动生成一张或多张入库检验单（验布来源为“调拨入库”）<br>3. 对应的入库单状态更新为“检验中”</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-IN-002</td>
+                <td>调拨入库审核</td>
+                <td>按关键维度拆分生成多张检验单</td>
+                <td>1. 创建调拨单，明细包含：<br>   - 商品A，批号P1，质量等级1<br>   - 商品A，批号P2，质量等级1<br>   - 商品B，批号P1，质量等级2<br>2. 审核入库</td>
+                <td>系统按【商品编码、货主、批号、批次、质量等级】维度，生成3张独立的入库检验单</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-IN-003</td>
+                <td>检验单字段</td>
+                <td>验证检验单中从调拨单映射的字段</td>
+                <td>1. 生成检验单后，打开任意一张检验单详情<br>2. 核对以下字段：<br>   - 验布来源 = “调拨入库”<br>   - 入库单号 = 调拨入库单号<br>   - 来源单号 = 原调拨单号<br>   - 供应商 = 货主名称<br>   - 仓库 = 调入仓<br>   - 入库日期 = 调拨入库单的入库日期<br>   - 到货质量等级 = 调拨明细中的质量等级<br>   - 主/副数量 = 按维度汇总的调拨数量</td>
+                <td>所有映射字段值均与调拨入库单明细信息一致，准确无误</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-IN-004</td>
+                <td>状态联动</td>
+                <td>生成检验单后，更新入库单和库存状态</td>
+                <td>1. 审核调拨入库生成检验单后<br>2. 查询该调拨入库单的“质检状态”<br>3. 查询对应库存记录的“质检状态”</td>
+                <td>1. 入库单的质检状态变为“检验中”<br>2. 相关库存记录的质检状态变为“检验中”</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>三、 检验单操作模块测试</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>用例ID</th>
+                <th>模块</th>
+                <th>测试场景</th>
+                <th>测试步骤</th>
+                <th>预期结果</th>
+                <th>优先级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-INSP-001</td>
+                <td>检验操作</td>
+                <td>完成来源为“调拨入库”的检验单</td>
+                <td>1. 进入入库检验单列表，筛选出来源为“调拨入库”的检验单<br>2. 打开一张待检验的检验单<br>3. 录入检验数据，点击“完成检验”或“确认”按钮</td>
+                <td>1. 操作流程与采购入库、调货入库的检验操作完全一致<br>2. 无报错，页面可正常流转<br>3. 检验单状态变更为“已确认”</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-INSP-002</td>
+                <td>验布机集成</td>
+                <td>支持使用验布机对调拨入库检验单进行验布</td>
+                <td>1. 连接验布机设备并确保系统正常<br>2. 打开一张来源为“调拨入库”的检验单<br>3. 启动验布机数据采集流程</td>
+                <td>验布机可正常接入，数据可回写至检验单，操作方式与现有采购/调货入库验布一致</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>四、 检验后处理与数据更新模块测试</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>用例ID</th>
+                <th>模块</th>
+                <th>测试场景</th>
+                <th>测试步骤</th>
+                <th>预期结果</th>
+                <th>优先级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-UPDATE-001</td>
+                <td>库存更新</td>
+                <td>检验合格，更新库存质量信息</td>
+                <td>1. 将一张来源为调拨入库的检验单结果设为“合格”并确认<br>2. 根据生成时的维度（商品编码、货主、批号、批次、质量等级）查询库存记录</td>
+                <td>1. 对应库存的“质检状态”更新为“合格”<br>2. 库存的“质量等级”、“质量异常类型”、“销售建议”、“销售建议说明”等字段按检验结果更新为合格相关信息</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-UPDATE-002</td>
+                <td>库存更新</td>
+                <td>检验不合格，更新库存质量信息</td>
+                <td>1. 将一张来源为调拨入库的检验单结果设为“不合格”并确认<br>2. 根据生成时的维度查询库存记录</td>
+                <td>1. 对应库存的“质检状态”更新为“不合格”<br>2. 库存的质量相关字段更新为不合格记录及原因</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-UPDATE-003</td>
+                <td>入库单状态联动</td>
+                <td>一个入库单对应多张检验单，部分完成时，入库单状态保持“检验中”</td>
+                <td>1. 一个调拨入库单因多维度拆分，生成了2张检验单（INP1, INP2）<br>2. 完成INP1（合格或不合格）<br>3. 检查该入库单的“质检状态”</td>
+                <td>入库单的质检状态仍为“检验中”，不会因为一张完成而变为最终状态</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-UPDATE-004</td>
+                <td>入库单状态联动</td>
+                <td>一个入库单对应多张检验单，全部合格完成</td>
+                <td>1. 延续TC-UPDATE-003，此时入库单状态为“检验中”<br>2. 完成INP2（设为合格）<br>3. 检查入库单质检状态</td>
+                <td>入库单质检状态更新为“检验合格”</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-UPDATE-005</td>
+                <td>入库单状态联动</td>
+                <td>一个入库单对应多张检验单，存在不合格时</td>
+                <td>1. 一个入库单对应INP1（合格）、INP2（不合格）<br>2. 全部完成确认<br>3. 检查入库单质检状态</td>
+                <td>入库单质检状态更新为“检验不合格”</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-UPDATE-006</td>
+                <td>异常场景</td>
+                <td>同维度调拨分两次入库，检验单完成时库存冲突</td>
+                <td>1. 场景：同一维度（商品A，货主X，批号P，批次B，等级1）的货物，通过两次独立的调拨入库到**同一个库位**<br>2. 因此生成两张检验单（INP-A, INP-B）<br>3. 先完成INP-A（库存更新）<br>4. 再完成INP-B</td>
+                <td>1. 系统不崩溃，无异常抛出<br>2. INP-B完成时，由于对应“检验中”状态的库存已被INP-A更新，应给出友好提示（如“无可更新库存”）并记录日志<br>3. 不影响其他数据和流程</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>五、 UI显示与飞书消息通知模块测试</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>用例ID</th>
+                <th>模块</th>
+                <th>测试场景</th>
+                <th>测试步骤</th>
+                <th>预期结果</th>
+                <th>优先级</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TC-UI-001</td>
+                <td>物理库存查询</td>
+                <td>显示“库存质检状态”列</td>
+                <td>1. 使用辰景、新全景、盛景任一主体账号登录<br>2. 进入【物理库存查询】页面<br>3. 查看列表表头</td>
+                <td>列表表头中“库存质检状态”字段可见（之前对某些主体隐藏的列已去掉隐藏）</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+            <tr>
+                <td>TC-MSG-001</td>
+                <td>飞书消息</td>
+                <td>检验结果为“已确认”时，推送消息到指定群</td>
+                <td>1. 完成一张来源为“调拨入库”的检验单并确认<br>2. 查看预配置的“仓库+品控群”飞书群聊</td>
+                <td>群内收到一条【入库检验结果同步】消息，格式符合要求，包含以下关键字段：<br>- 检验单号<br>- 检验来源：调拨入库<br>- 入库单号、来源单号<br>- 供应商名称、商品编码、商品名称<br>- 批号（为空时显示为空）<br>- 入库主/副数量<br>- 检验结果（合格/不合格/免检）<br>- 品控实际检验时间、品控人员<br>- 检验工单完成时间</td>
+                <td><span class="tag tag-p0">P0</span></td>
+            </tr>
+            <tr>
+                <td>TC-MSG-002</td>
+                <td>飞书消息</td>
+                <td>消息推送的接收群组正确</td>
+                <td>1. 完成检验单<br>2. 检查消息接收群组设置</td>
+                <td>消息仅推送到配置的“仓库+品控群”，不推送到其他无关群组</td>
+                <td><span class="tag tag-p1">P1</span></td>
+            </tr>
+            <tr>
+                <td>TC-MSG-003</td>
+                <td>飞书消息</td>
+                <td>无批号时，消息中“批号”字段为空</td>
+                <td>1. 创建一条调拨入库检验单，该商品无批号信息<br>2. 完成该检验单<br>3. 查看飞书消息内容</td>
+                <td>消息中“批号”字段显示为空字符串或预设占位符（如“--”），消息整体格式不错乱，无报错</td>
+                <td><span class="tag tag-p2">P2</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p><strong>说明：</strong></p>
+        <p>1. 优先级说明：P0-核心功能，必须优先保证；P1-重要功能，需在发布前完成；P2-一般功能，可在问题修复后补充。</p>
+        <p>2. 本用例基于需求文档 V1.0 编写，测试环境需提前部署对应版本代码。</p>
+        <p>3. “货主”指库存所属的货主信息，“批次”指业务批次。</p>
+        <p>© 2024 测试团队 - 内部保密文档</p>
+    </div>
+
+</body>
+</html>
